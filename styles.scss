@@ -1,0 +1,355 @@
+//outside import
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+// Global
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: initial;
+  text-decoration: none;
+}
+p {
+  margin: 0;
+}
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex-center-colums {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+@mixin mobile {
+  @media screen and (max-width: 600px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 1100px) {
+    @content;
+  }
+}
+// keyframes
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 7));
+  }
+}
+
+//Variables
+$initial-text: white;
+$banners-size: 450px;
+$about-container-height: 700px;
+// scss import
+@import "./limited/limited";
+// page
+html {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.fixed-body {
+  position: fixed;
+}
+header {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  .burger {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    color: white;
+    font-size: 48px;
+    z-index: 10;
+    padding: 10px 20px;
+    @include mobile {
+      display: block;
+    }
+  }
+  .none {
+    @include mobile {
+      display: none;
+    }
+  }
+  nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    height: 70px;
+    @include mobile {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.637);
+      border-bottom: 5px solid #2f4c68;
+      @include flex-center;
+    }
+    ul {
+      margin: 0 10px;
+      #nav-color-orange {
+        color: #d4a86f;
+        &:hover {
+          color: #c78823;
+        }
+      }
+      #nav-color {
+        color: #a0beda;
+        &:hover {
+          color: #2d5174;
+        }
+      }
+      a {
+        display: inline-flex;
+        color: $initial-text;
+        font-size: 42px;
+        font-weight: 500;
+        padding: 10px 5px;
+        @include tablet {
+          font-size: 32px;
+        }
+        @include mobile {
+          display: block;
+          font-size: 36px;
+          padding: 20px 0;
+          border-bottom: 1px solid #2f4c68;
+        }
+        &:hover {
+          color: #2d5174;
+        }
+        li {
+          @include flex-center;
+          img {
+            width: 28px;
+            height: 16px;
+            padding-left: 5px;
+            @include mobile {
+              width: 42px;
+              height: 28px;
+              padding: 0 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .header-logo {
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    @include flex-center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    img {
+      width: 60%;
+    }
+  }
+  video {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-height: 100%;
+    min-width: 100%;
+  }
+}
+main {
+  .slider {
+    background: white;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+    height: 100px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    max-width: 2625px;
+    &::before,
+    &::after {
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      content: "";
+      height: 100px;
+      position: absolute;
+      width: 100px;
+      z-index: 2;
+    }
+    &::after {
+      right: 0;
+      top: 0;
+      transform: rotateZ(180deg);
+    }
+    &::before {
+      left: 0;
+      top: 0;
+    }
+    .slide-track {
+      animation: scroll 80s linear infinite;
+      display: flex;
+      width: calc(250px * 24);
+      .slide {
+        height: 100px;
+        width: 150px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .about-section {
+    background: url("./img/warehouse.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: $about-container-height;
+    .text-container {
+      width: 100%;
+      background-color: #01020388;
+      min-height: $about-container-height;
+      @include flex-center;
+      p {
+        color: $initial-text;
+        font-size: 32px;
+        padding: 100px 80px;
+        @include mobile {
+          padding: 100px 20px;
+        }
+      }
+    }
+  }
+  .banners-section {
+    height: $banners-size;
+    position: relative;
+    .blur {
+      background: rgba(0, 0, 0, 0.42);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .black {
+      a {
+        border: 2px solid black;
+        &:hover {
+          background: black;
+          color: white;
+        }
+      }
+    }
+    .white {
+      color: white;
+      a {
+        border: 2px solid white;
+        color: white;
+        &:hover {
+          background: white;
+          color: black;
+        }
+      }
+    }
+    .banner-wrapper {
+      z-index: 5;
+      position: absolute;
+      top: 0;
+      height: $banners-size - 200px;
+
+      text-align: center;
+      @include flex-center-colums;
+
+      h3 {
+        font-size: 36px;
+        margin: 0;
+      }
+      p {
+        margin: 0px;
+      }
+      a {
+        font-size: 32px;
+        font-weight: 600;
+        margin-top: 20px;
+        padding: 10px 20px;
+      }
+    }
+    .right {
+      right: 0;
+      padding: 100px 200px 100px 0px;
+      @include tablet {
+        padding: 100px 80px 100px 0px;
+      }
+      @include mobile {
+        padding: 100px 0 100px 0;
+        width: 100%;
+      }
+    }
+    .left {
+      left: 0;
+      padding: 100px 0px 100px 200px;
+      @include tablet {
+        padding: 100px 0px 100px 100px;
+      }
+      @include mobile {
+        padding: 100px 0 100px 0;
+        width: 100%;
+      }
+    }
+    img {
+      width: 100%;
+      height: $banners-size;
+    }
+  }
+  #contact {
+    padding: 70px 0;
+    text-align: center;
+    h3 {
+      font-size: 48px;
+      margin: 0;
+    }
+    h5 {
+      font-size: 36px;
+      margin: 10px;
+    }
+    ul {
+      margin-bottom: 20px;
+      li {
+        font-size: 1.2rem;
+        i {
+          margin-right: 10px;
+          color: #2f4c68;
+        }
+      }
+    }
+  }
+}
+footer {
+  background: #222121;
+  color: white;
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  p,
+  h5 {
+    margin: 0;
+    padding-top: 10px;
+  }
+}

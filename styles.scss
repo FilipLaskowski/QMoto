@@ -248,6 +248,16 @@ main {
       top: 0;
       left: 0;
     }
+    .logo-golden {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 30%;
+      height: 200px;
+      @include tablet {
+        display: none;
+      }
+    }
     .black {
       a {
         border: 2px solid black;
@@ -273,10 +283,16 @@ main {
       position: absolute;
       top: 0;
       height: $banners-size - 200px;
-
+      max-width: 500px;
       text-align: center;
       @include flex-center-colums;
-
+      img {
+        width: 100%;
+      }
+      .logo-golden {
+        width: 33%;
+        z-index: 20;
+      }
       h3 {
         font-size: 36px;
         margin: 0;
